@@ -3,6 +3,10 @@ package javaz.util.stream;
 import javaz.util.function.BiFunction;
 import javaz.util.function.Cbn;
 import javaz.util.function.Function;
+import javaz.util.function.FunctionStatics;
+
+import javaz.util.option.Option;
+import javaz.util.option.OptionStatics;
 
 public class StreamStatics {
 
@@ -107,6 +111,32 @@ public class StreamStatics {
  ) {
   return
    sz1.plus(sz2);
+ }
+ // end
+
+ // begin sequenceFun_StreamStatics_
+ public static <Z>
+ Function<Option<Stream<Z>>, Stream<Option<Z>>> sequenceFun(
+  final Cbn<Option<Z>> oz,
+  final Function<Option<Z>, Option<Z>> oz2oz
+ ) {
+  return
+   osz ->
+    osz.foreachToStream(oz, oz2oz)._(
+     liftF(OptionStatics::one)
+    );
+ }
+ // end
+
+ // begin additiveSequence_StreamStatics_
+ public static <Z>
+ Function<Option<Stream<Z>>, Stream<Option<Z>>>
+ additiveSequence() {
+  return
+   sequenceFun(
+    OptionStatics::zero,
+    FunctionStatics::identity
+   );
  }
  // end
 

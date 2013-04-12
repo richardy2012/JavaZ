@@ -1,5 +1,8 @@
 package javaz.util.apps;
 
+import javaz.util.option.Option;
+import javaz.util.option.OptionStatics;
+
 import javaz.util.stream.Stream;
 import javaz.util.stream.StreamStatics;
 
@@ -44,6 +47,24 @@ public class StreamApp {
     () -> fibonacciNumbersFrom(fib1, fib0 + fib1)
    );
  }
+ // end
+
+ // begin someOptionsOfStreams_StreamApp_
+ private static final
+ Option<Stream<String>> oneSA_plus_oneSB =
+  OptionStatics.one(one("a")).plus(() ->
+   OptionStatics.one(one("b"))
+  );
+ private static final
+ Option<Stream<String>> oneZ_plus_oneSB =
+  OptionStatics.<Stream<String>>one(zero()).plus(() ->
+   OptionStatics.one(one("b"))
+  );
+ private static final
+ Option<Stream<String>> oneSA_plus_oneZ =
+  OptionStatics.one(one("a")).plus(() ->
+   OptionStatics.one(zero())
+  );
  // end
 
  public static void main(String[] args) {
@@ -193,6 +214,43 @@ public class StreamApp {
    fibonacciNumbersFrom(1, 2).take(4);
   // end
   System.out.println("example15 = " + example15);
+  // begin example16_StreamApp_
+  // example16 = one(one(a)) : zero
+
+  Stream<Option<String>> example16 =
+   StreamStatics.<String>additiveSequence()._(
+    oneSA_plus_oneSB
+   );
+  // end
+  System.out.println("example16 = " + example16);
+  // begin example17_StreamApp_
+  // example17 = zero
+
+  Stream<Option<String>> example17 =
+   StreamStatics.<String>additiveSequence()._(
+    oneZ_plus_oneSB
+   );
+  // end
+  System.out.println("example17 = " + example17);
+  // begin example18_StreamApp_
+  // example18 = one(one(a)) : zero
+
+  Stream<Option<String>> example18 =
+   StreamStatics.<String>additiveSequence()._(
+    oneSA_plus_oneZ
+   );
+  // end
+  System.out.println("example18 = " + example18);
+  // begin example19_StreamApp_
+  // example19 = one(one(A) : one(B) : zero)
+  Option<Stream<String>> example19 =
+   oneA_plus_oneB.<String>additiveForeachToOption()._(s ->
+    OptionStatics.one(
+     one(s.toUpperCase())
+    )
+   );
+  System.out.println("example19 = " + example19);
+  // end
  }
 
 }

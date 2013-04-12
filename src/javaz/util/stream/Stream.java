@@ -130,16 +130,6 @@ public interface Stream<Z> {
  }
  // end
 
- // begin identity_Stream_
- default public Stream<Z> identity() {
-  return
-   fold(
-    StreamStatics::more,
-    StreamStatics::done
-   );
- }
- // end
-
  // begin foreachToOption_Stream_
  default public <Y, X>
  Function<Function<Z, Option<Y>>, Option<X>>
@@ -183,6 +173,16 @@ public interface Stream<Z> {
    foreachToOption(
     StreamStatics::zero,
     StreamStatics::plus
+   );
+ }
+ // end
+
+ // begin identity_Stream_
+ default public Stream<Z> identity() {
+  return
+   fold(
+    StreamStatics::more,
+    StreamStatics::done
    );
  }
  // end

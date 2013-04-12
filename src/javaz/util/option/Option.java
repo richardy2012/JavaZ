@@ -2,6 +2,10 @@ package javaz.util.option;
 
 import javaz.util.function.Cbn;
 import javaz.util.function.Function;
+import javaz.util.function.FunctionStatics;
+
+import javaz.util.stream.Stream;
+import javaz.util.stream.StreamStatics;
 
 import static javaz.util.option.OptionStatics.one;
 import static javaz.util.option.OptionStatics.zero;
@@ -105,6 +109,61 @@ public interface Option<Z> {
    fold(
     OptionStatics::some,
     _2oz
+   );
+ }
+ // end
+
+ // begin foreachDeclaration_Option_
+ default public <Y, X, MY, MX>
+ Function<Function<Z, MY>, MX> foreach(
+  final Cbn<X> x,
+  final Function<Y, X> y2x,
+  final Function<Cbn<X>, Cbn<MX>> lift,
+  final Function<Function<Y, X>, Function<MY, MX>> liftF
+ )
+ // end
+
+ // begin foreachDefinition_Option_
+ {
+  return
+   z2my ->
+    fold(
+     z -> liftF._(y2x)._(z2my._(z)),
+     lift._(x)
+    );
+ }
+ // end
+
+ // begin foreachToStream_Option_
+ default public <Y, X>
+ Function<
+  Function<Z, Stream<Y>>,
+  Stream<X>
+  > foreachToStream(
+  final Cbn<X> x,
+  final Function<Y, X> y2x
+ ) {
+  return
+   foreach(
+    x,
+    y2x,
+    StreamStatics::lift,
+    StreamStatics::liftF
+   );
+ }
+ // end
+
+ // begin additiveForeachToStream_Option_
+ default public <Y>
+ Function<
+  Function<Z, Stream<Option<Y>>>,
+  Stream<Option<Y>>
+  > additiveForeachToStream(
+ ) {
+  return
+   foreachToStream(
+    OptionStatics::zero,
+    FunctionStatics::identity
    );
  }
  // end

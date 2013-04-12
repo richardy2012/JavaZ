@@ -207,6 +207,16 @@ public class OptionApp {
    );
   // end
   System.out.println("example16 = " + example16);
+  // begin example17_OptionApp_
+  // example17 = one(one(A)) : zero
+  Stream<Option<String>> example17 =
+   oneA_plus_oneB.<String>additiveForeachToStream()._(s ->
+    StreamStatics.one(
+     one(s.toUpperCase())
+    )
+   );
+  System.out.println("example17 = " + example17);
+  // end
  }
 
 }
