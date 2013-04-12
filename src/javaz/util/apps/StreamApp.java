@@ -5,6 +5,7 @@ import javaz.util.stream.StreamStatics;
 
 import static javaz.util.stream.StreamStatics.one;
 import static javaz.util.stream.StreamStatics.zero;
+
 public class StreamApp {
 
  private static final
@@ -34,8 +35,7 @@ public class StreamApp {
  // end
 
  // begin fibonacciNumbersFrom_StreamApp_
- private static
- Stream<Integer> fibonacciNumbersFrom(
+ private static Stream<Integer> fibonacciNumbersFrom(
   Integer fib0,
   Integer fib1
  ) {

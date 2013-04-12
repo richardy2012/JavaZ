@@ -13,5 +13,7 @@ and
 all comments are welcome
 
 Luc Duponcheel
+
 Programmer
+
 ImagineJ

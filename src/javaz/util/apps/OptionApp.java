@@ -2,6 +2,8 @@ package javaz.util.apps;
 
 import javaz.util.option.Option;
 import javaz.util.option.OptionStatics;
+import javaz.util.stream.Stream;
+import javaz.util.stream.StreamStatics;
 
 import static javaz.util.option.OptionStatics.one;
 import static javaz.util.option.OptionStatics.zero;
@@ -27,7 +29,26 @@ public class OptionApp {
   OptionStatics.<String>zero().plus(() -> one("a"));
  // end
 
+ // begin someStreamsOfOptions_OptionApp_
+ private static final
+ Stream<Option<String>> oneOA_plus_oneOB =
+  StreamStatics.one(one("a")).plus(() ->
+   StreamStatics.one(one("b"))
+  );
+ private static final
+ Stream<Option<String>> oneZ_plus_oneOB =
+  StreamStatics.<Option<String>>one(zero()).plus(() ->
+   StreamStatics.one(one("b"))
+  );
+ private static final
+ Stream<Option<String>> oneOA_plus_oneZ =
+  StreamStatics.one(one("a")).plus(() ->
+   StreamStatics.one(zero())
+  );
+ // end
+
  public static void main(String[] args) {
+
   // begin example01_OptionApp_
   // example01 = one(abc)
 
@@ -159,6 +180,33 @@ public class OptionApp {
    oneA_plus_oneB.length();
   // end
   System.out.println("example13 = " + example13);
+  // begin example14_OptionApp_
+  // example14 = one(one(a) : one(b) : zero)
+
+  Option<Stream<String>> example14 =
+   OptionStatics.<String>constructiveSequence()._(
+    oneOA_plus_oneOB
+   );
+  // end
+  System.out.println("example14 = " + example14);
+  // begin example15_OptionApp_
+  // example15 = zero
+
+  Option<Stream<String>> example15 =
+   OptionStatics.<String>constructiveSequence()._(
+    oneZ_plus_oneOB
+   );
+  // end
+  System.out.println("example15 = " + example15);
+  // begin example16_OptionApp_
+  // example16 = zero
+
+  Option<Stream<String>> example16 =
+   OptionStatics.<String>constructiveSequence()._(
+    oneOA_plus_oneZ
+   );
+  // end
+  System.out.println("example16 = " + example16);
  }
 
 }
