@@ -4,7 +4,6 @@ import javaz.util.function.BiFunction;
 import javaz.util.function.Cbn;
 import javaz.util.function.Function;
 import javaz.util.function.FunctionStatics;
-
 import javaz.util.stream.Stream;
 import javaz.util.stream.StreamStatics;
 

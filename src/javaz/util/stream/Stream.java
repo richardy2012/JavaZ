@@ -4,15 +4,12 @@ import javaz.util.function.BiFunction;
 import javaz.util.function.Cbn;
 import javaz.util.function.Function;
 
-import javaz.util.option.Option;
-import javaz.util.option.OptionStatics;
-import javaz.util.state.State;
-import javaz.util.state.StateStatics;
-
-import static javaz.util.stream.StreamStatics.more;
 import static javaz.util.stream.StreamStatics.one;
-import static javaz.util.stream.StreamStatics.plus;
 import static javaz.util.stream.StreamStatics.zero;
+
+import javaz.util.concurrent.Future;
+import javaz.util.concurrent.FutureStatics;
+
 
 // begin Stream
 public interface Stream<Z> {
@@ -126,7 +123,8 @@ public interface Stream<Z> {
   return
    z2my ->
     fold(
-     (z, mx) -> liftBF._(ynx2x)._(z2my._(z), mx),
+     (z, mx) ->
+      liftBF._(ynx2x)._(z2my._(z), mx),
      lift._(x)
     );
  }

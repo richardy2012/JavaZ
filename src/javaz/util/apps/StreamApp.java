@@ -1,10 +1,8 @@
 package javaz.util.apps;
 
 import javaz.util.function.FunctionStatics;
-
 import javaz.util.option.Option;
 import javaz.util.option.OptionStatics;
-
 import javaz.util.stream.Stream;
 import javaz.util.stream.StreamStatics;
 

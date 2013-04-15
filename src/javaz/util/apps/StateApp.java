@@ -1,25 +1,17 @@
 package javaz.util.apps;
 
-import javaz.util.function.Cbn;
-import javaz.util.function.Function;
-
 import javaz.util.state.State;
 import javaz.util.state.StateStatics;
 import javaz.util.stream.Stream;
-import javaz.util.stream.StreamStatics;
 import javaz.util.unit.Unit;
 
+import static javaz.util.apps.Action.CANDY;
+import static javaz.util.apps.Action.COIN;
+import static javaz.util.apps.Status.BUSY;
+import static javaz.util.apps.Status.FREE;
 import static javaz.util.state.StateStatics.exec;
 import static javaz.util.stream.StreamStatics.one;
 import static javaz.util.unit.UnitStatics.unit;
-
-
-import javaz.util.apps.Machine;
-
-import static javaz.util.apps.Action.COIN;
-import static javaz.util.apps.Action.CANDY;
-import static javaz.util.apps.Status.FREE;
-import static javaz.util.apps.Status.BUSY;
 
 public class StateApp {
  // begin actions_StateApp_
@@ -69,13 +61,18 @@ public class StateApp {
  }
  // end
 
- // begin main_StateApp_
- public static void main(String[] args) {
-  System.out.println(stateMachine(actions).open()._(
-   new Machine(FREE, 10, 0)
-  )._2
+ private static void stateMachineTest() {
+  // begin stateMachineTest_StateApp_
+  System.out.println(
+   stateMachine(actions).open()._(
+    new Machine(FREE, 10, 0)
+   )._2
   );
+  // end
  }
- // end
+
+ public static void main(String[] args) {
+  stateMachineTest();
+ }
 
 }

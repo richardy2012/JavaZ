@@ -2,7 +2,6 @@ package javaz.util.stream;
 
 import javaz.util.function.BiFunction;
 import javaz.util.function.Cbn;
-import javaz.util.function.Function;
 
 import static javaz.util.stream.StreamStatics.done;
 import static javaz.util.stream.StreamStatics.more;

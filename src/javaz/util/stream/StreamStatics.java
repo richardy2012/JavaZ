@@ -3,8 +3,6 @@ package javaz.util.stream;
 import javaz.util.function.BiFunction;
 import javaz.util.function.Cbn;
 import javaz.util.function.Function;
-import javaz.util.function.FunctionStatics;
-
 import javaz.util.option.Option;
 import javaz.util.option.OptionStatics;
 

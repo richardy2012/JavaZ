@@ -6,6 +6,7 @@ for the moment it only deals with
  - Option
  - Stream
  - State
+ - Future
 
 expect frequent additions of new stuff 
 and
