@@ -5,6 +5,7 @@ the project is in a preliminary state
 for the moment it only deals with
  - Option
  - Stream
+ - State
 
 expect frequent additions of new stuff 
 and

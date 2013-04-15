@@ -1,5 +1,7 @@
 package javaz.util.apps;
 
+import javaz.util.function.FunctionStatics;
+
 import javaz.util.option.Option;
 import javaz.util.option.OptionStatics;
 
@@ -82,6 +84,7 @@ public class StreamApp {
    );
   // end
   System.out.println("example01 = " + example01);
+
   // begin example02_StreamApp_
   // example02 = one(abc) : zero
 
@@ -95,6 +98,7 @@ public class StreamApp {
    );
   // end
   System.out.println("example02 = " + example02);
+
   // begin example03_StreamApp_
   // example03 = one(abc) : zero
 
@@ -108,6 +112,7 @@ public class StreamApp {
    );
   // end
   System.out.println("example03 = " + example03);
+
   // begin example04_StreamApp_
   // example04 = zero
 
@@ -121,6 +126,7 @@ public class StreamApp {
    );
   // end
   System.out.println("example04 = " + example04);
+
   // begin example05_StreamApp_
   // example05 = zero
 
@@ -134,6 +140,7 @@ public class StreamApp {
    );
   // end
   System.out.println("example05 = " + example05);
+
   // begin example06_StreamApp_
   // example06 = one(c) : zero
 
@@ -145,6 +152,7 @@ public class StreamApp {
    );
   // end
   System.out.println("example06 = " + example06);
+
   // begin example07_StreamApp_
   // example07 = zero
 
@@ -154,6 +162,7 @@ public class StreamApp {
    );
   // end
   System.out.println("example07 = " + example07);
+
   // begin example08_StreamApp_
   // example08 = one(a) : one(b) : zero
 
@@ -161,6 +170,7 @@ public class StreamApp {
    oneA_plus_oneB;
   // end
   System.out.println("example08 = " + example08);
+
   // begin example09_StreamApp_
   // example09 = one(a) : zero
 
@@ -168,6 +178,7 @@ public class StreamApp {
    oneA_plus_zero;
   // end
   System.out.println("example09 = " + example09);
+
   // begin example10_StreamApp_
   // example10 = one(a) : zero
 
@@ -175,6 +186,7 @@ public class StreamApp {
    zero_plus_oneA;
   // end
   System.out.println("example10 = " + example10);
+
   // begin example11_StreamApp_
   // example11 = one(ac) : one(ad) : one(bc) : one(bd) : zero
 
@@ -186,6 +198,7 @@ public class StreamApp {
    );
   // end
   System.out.println("example11 = " + example11);
+
   // begin example12_StreamApp_
   // example12 = example12 = one(a) : one(b) : zero
 
@@ -193,6 +206,7 @@ public class StreamApp {
    oneA_plus_oneB.identity();
   // end
   System.out.println("example12 = " + example12);
+
   // begin example13_StreamApp_
   // example13 = 2
 
@@ -200,6 +214,7 @@ public class StreamApp {
    oneA_plus_oneB.length();
   // end
   System.out.println("example13 = " + example13);
+
   // begin example14_StreamApp_
   // example14 = one(a) : one(a) : one(a) : one(a) : zero
 
@@ -207,6 +222,7 @@ public class StreamApp {
    infinitelyMany("a").take(4);
   // end
   System.out.println("example14 = " + example14);
+
   // begin example15_StreamApp_
   // example15 = one(1) : one(2) : one(3) : one(5) : zero
 
@@ -214,43 +230,64 @@ public class StreamApp {
    fibonacciNumbersFrom(1, 2).take(4);
   // end
   System.out.println("example15 = " + example15);
+
   // begin example16_StreamApp_
   // example16 = one(one(a)) : zero
 
   Stream<Option<String>> example16 =
-   StreamStatics.<String>additiveSequence()._(
+   StreamStatics.<String>sequenceFun(
+    OptionStatics::zero,
+    FunctionStatics::identity
+   )._(
     oneSA_plus_oneSB
    );
   // end
   System.out.println("example16 = " + example16);
+
   // begin example17_StreamApp_
   // example17 = zero
 
   Stream<Option<String>> example17 =
-   StreamStatics.<String>additiveSequence()._(
+   StreamStatics.<String>sequenceFun(
+    OptionStatics::zero,
+    FunctionStatics::identity
+   )._(
     oneZ_plus_oneSB
    );
   // end
   System.out.println("example17 = " + example17);
+
+
   // begin example18_StreamApp_
   // example18 = one(one(a)) : zero
 
   Stream<Option<String>> example18 =
-   StreamStatics.<String>additiveSequence()._(
+   StreamStatics.<String>sequenceFun(
+    OptionStatics::zero,
+    FunctionStatics::identity
+   )._(
     oneSA_plus_oneZ
    );
   // end
   System.out.println("example18 = " + example18);
+
   // begin example19_StreamApp_
   // example19 = one(one(A) : one(B) : zero)
   Option<Stream<String>> example19 =
-   oneA_plus_oneB.<String>additiveForeachToOption()._(s ->
+   oneA_plus_oneB.<
+    Stream<String>, Stream<String>,
+    Option<Stream<String>>, Option<Stream<String>>
+    >foreach(
+    StreamStatics::zero, StreamStatics::plus,
+    OptionStatics::lift, OptionStatics::liftBF
+   )._(s ->
     OptionStatics.one(
      one(s.toUpperCase())
     )
    );
-  System.out.println("example19 = " + example19);
   // end
+  System.out.println("example19 = " + example19);
+
  }
 
 }

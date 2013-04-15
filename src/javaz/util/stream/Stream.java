@@ -6,6 +6,8 @@ import javaz.util.function.Function;
 
 import javaz.util.option.Option;
 import javaz.util.option.OptionStatics;
+import javaz.util.state.State;
+import javaz.util.state.StateStatics;
 
 import static javaz.util.stream.StreamStatics.more;
 import static javaz.util.stream.StreamStatics.one;
@@ -127,53 +129,6 @@ public interface Stream<Z> {
      (z, mx) -> liftBF._(ynx2x)._(z2my._(z), mx),
      lift._(x)
     );
- }
- // end
-
- // begin foreachToOption_Stream_
- default public <Y, X>
- Function<Function<Z, Option<Y>>, Option<X>>
- foreachToOption(
-  final Cbn<X> x,
-  final BiFunction<Y, Cbn<X>, X> ynx2x
- ) {
-  return
-   foreach(
-    x,
-    ynx2x,
-    OptionStatics::lift,
-    OptionStatics::liftBF
-   );
- }
- // end
-
- // begin constructiveForeachToOption_Stream_
- default public <Y>
- Function<
-  Function<Z, Option<Y>>,
-  Option<Stream<Y>>
-  > constructiveForeachToOption(
- ) {
-  return
-   foreachToOption(
-    StreamStatics::done,
-    StreamStatics::more
-   );
- }
- // end
-
- // begin additiveForeachToOption_Stream_
- default public <Y>
- Function<
-  Function<Z, Option<Stream<Y>>>,
-  Option<Stream<Y>>
-  > additiveForeachToOption(
- ) {
-  return
-   foreachToOption(
-    StreamStatics::zero,
-    StreamStatics::plus
-   );
  }
  // end
 

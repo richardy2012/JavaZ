@@ -11,8 +11,8 @@ import javaz.util.stream.StreamStatics;
 public class OptionStatics {
 
  // begin some_OptionStatics_
- // factory method (used in library code)
- // not part of application programmer DSL
+ // specific factory method
+ // not part of generic DSL
 
  public static <Z>
  Option<Z> some(
@@ -24,14 +24,26 @@ public class OptionStatics {
  // end
 
  // begin none_OptionStatics_
- // factory method (used in library code)
- // not part of application programmer DSL
+ // specific factory method
+ // not part of generic DSL
 
  public static <Z>
  Option<Z> none(
  ) {
   return
    new None<Z>();
+ }
+ // end
+
+ // begin join_OptionStatics_
+ public static <Z>
+ Function<Option<Option<Z>>, Option<Z>> join(
+ ) {
+  return
+   ooz ->
+    ooz.bindM(oz ->
+     oz
+    );
  }
  // end
 
@@ -96,7 +108,20 @@ public class OptionStatics {
     );
  }
 
- // begin sequenceOp_OptionStatics_
+ // begin plus_OptionStatics_
+ // static version of plus
+
+ public static <Z>
+ Option<Z> plus(
+  final Option<Z> oz1,
+  final Cbn<Option<Z>> oz2
+ ) {
+  return
+   oz1.plus(oz2);
+ }
+ // end
+
+ // begin sequenceOpDeclaration_OptionStatics_
  public static <Z>
  Function<Stream<Option<Z>>, Option<Stream<Z>>> sequenceOp(
   final Cbn<Stream<Z>> sz,
@@ -104,53 +129,44 @@ public class OptionStatics {
    Stream<Z>, Cbn<Stream<Z>>,
    Stream<Z>
    > sznsz2sz
- ) {
+ )
+ // end
+
+ // begin sequenceOpDefinition_OptionStatics_
+ {
   return
    soz ->
-    soz.foreachToOption(sz, sznsz2sz)._(
+    soz.foreach(
+     sz,
+     sznsz2sz,
+     OptionStatics::lift,
+     OptionStatics::liftBF
+    )._(
      liftF(StreamStatics::one)
     );
  }
  // end
 
- // begin sequenceAcc_OptionStatics_
+ // begin sequenceAccDeclaration_OptionStatics_
  public static <Z>
  Function<Stream<Option<Z>>, Option<Stream<Z>>> sequenceAcc(
   final Cbn<Stream<Z>> sz,
   final BiFunction<Z, Cbn<Stream<Z>>, Stream<Z>> znsz2sz
- ) {
+ )
+ // end
+
+ // begin sequenceAccDefinition_OptionStatics_
+ {
   return
    soz ->
-    soz.foreachToOption(sz, znsz2sz)._(
+    soz.foreach(
+     sz,
+     znsz2sz,
+     OptionStatics::lift,
+     OptionStatics::liftBF
+    )._(
      liftF(FunctionStatics::identity)
     );
  }
  // end
-
- // begin constructiveSequence_OptionStatics_
- public static <Z>
- Function<Stream<Option<Z>>, Option<Stream<Z>>>
- constructiveSequence(
- ) {
-  return
-   sequenceAcc(
-    StreamStatics::done,
-    StreamStatics::more
-   );
- }
- // end
-
- // begin additiveSequence_OptionStatics_
- public static <Z>
- Function<Stream<Option<Z>>, Option<Stream<Z>>>
- additiveSequence(
- ) {
-  return
-   sequenceOp(
-    StreamStatics::zero,
-    StreamStatics::plus
-   );
- }
- // end
-
 }

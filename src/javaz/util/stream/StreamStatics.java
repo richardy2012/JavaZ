@@ -30,6 +30,16 @@ public class StreamStatics {
  }
  // end
 
+ public static <Z>
+ Function<Stream<Stream<Z>>, Stream<Z>> join(
+ ) {
+  return
+   ssz ->
+    ssz.bindM(sz ->
+     sz
+    );
+ }
+
  // begin one_StreamStatics_
  public static <Z>
  Stream<Z> one(
@@ -114,29 +124,26 @@ public class StreamStatics {
  }
  // end
 
- // begin sequenceFun_StreamStatics_
+ // begin sequenceFunDeclaration_StreamStatics_
  public static <Z>
  Function<Option<Stream<Z>>, Stream<Option<Z>>> sequenceFun(
   final Cbn<Option<Z>> oz,
   final Function<Option<Z>, Option<Z>> oz2oz
- ) {
-  return
-   osz ->
-    osz.foreachToStream(oz, oz2oz)._(
-     liftF(OptionStatics::one)
-    );
- }
+ )
  // end
 
- // begin additiveSequence_StreamStatics_
- public static <Z>
- Function<Option<Stream<Z>>, Stream<Option<Z>>>
- additiveSequence() {
+ // begin sequenceFunDefinition_StreamStatics_
+ {
   return
-   sequenceFun(
-    OptionStatics::zero,
-    FunctionStatics::identity
-   );
+   osz ->
+    osz.foreach(
+     oz,
+     oz2oz,
+     StreamStatics::lift,
+     StreamStatics::liftF
+    )._(
+     liftF(OptionStatics::one)
+    );
  }
  // end
 

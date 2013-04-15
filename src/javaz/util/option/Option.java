@@ -26,7 +26,8 @@ public interface Option<Z> {
  // end
 
  // begin bindM_Option_
- // binding is fundamental (functional) programming concept
+ // binding is a fundamental
+ // (functional) programming concept
 
  default public <Y>
  Option<Y> bindM(
@@ -131,40 +132,6 @@ public interface Option<Z> {
      z -> liftF._(y2x)._(z2my._(z)),
      lift._(x)
     );
- }
- // end
-
- // begin foreachToStream_Option_
- default public <Y, X>
- Function<
-  Function<Z, Stream<Y>>,
-  Stream<X>
-  > foreachToStream(
-  final Cbn<X> x,
-  final Function<Y, X> y2x
- ) {
-  return
-   foreach(
-    x,
-    y2x,
-    StreamStatics::lift,
-    StreamStatics::liftF
-   );
- }
- // end
-
- // begin additiveForeachToStream_Option_
- default public <Y>
- Function<
-  Function<Z, Stream<Option<Y>>>,
-  Stream<Option<Y>>
-  > additiveForeachToStream(
- ) {
-  return
-   foreachToStream(
-    OptionStatics::zero,
-    FunctionStatics::identity
-   );
  }
  // end
 
