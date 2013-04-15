@@ -16,7 +16,7 @@ public interface Future<Z> {
 // end
 
  // begin bindF_Future_
- // note: has other default definition
+ // note: has specific default definition
 
  default public <Y>
  Future<Y> bindF(
@@ -30,7 +30,7 @@ public interface Future<Z> {
  // end
 
  // begin bindADeclaration_Future_
- // note: has other default definition
+ // note: has specific default definition
 
  default public <Y>
  Future<Y> bindA(
