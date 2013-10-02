@@ -1,4 +1,4 @@
-package javaz.util.one;
+package function;
 
 /////////////////////////////////////////////////////////////////////////////////
 //      ___________                                         ___________        //
@@ -15,5 +15,6 @@ package javaz.util.one;
 //                          Luc Duponcheel (ImagineJ)                          //
 /////////////////////////////////////////////////////////////////////////////////
 
-public interface One<Z> {
+public interface Function1<Z, Y> {
+ Y __(final Z z);
 }

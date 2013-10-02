@@ -1,4 +1,4 @@
-package javaz.util.one;
+package function;
 
 /////////////////////////////////////////////////////////////////////////////////
 //      ___________                                         ___________        //
@@ -15,5 +15,8 @@ package javaz.util.one;
 //                          Luc Duponcheel (ImagineJ)                          //
 /////////////////////////////////////////////////////////////////////////////////
 
-public interface One<Z> {
+public class FunctionFactory {
+ public static <Z> Z id(final Z z) {
+  return z;
+ }
 }
