@@ -17,12 +17,9 @@ package javaz.util.function;
 
 public class FunctionFactory {
  /**
-  * the identity static method has
-  * a parameter value of type Z
-  * and
-  * a return value of type Z
-  * <p/>
-  * the return value is the same as the parameter value
+  * the return value
+  * of the identity static method
+  * is the same as its parameter value
   *
   * @param <Z> the type of the parameter value (and the return value)
   * @param z   the parameter value

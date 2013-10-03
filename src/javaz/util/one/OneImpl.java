@@ -18,26 +18,34 @@ package javaz.util.one;
 import javaz.util.function.Function;
 
 /**
- * a One instance describes a computation
- * resulting in exactly one value of type Z
- *
- * @param <Z> the type of the resulting value of the computation
+ * OneImpl is the only implementation of One
  */
-public interface One<Z> {
+public class OneImpl<Z>
+ implements One<Z> {
  /**
-  * the travereseUsing method traverses
-  * the structure of the resulting value of a One computation
-  * and returns a value of type A
-  * by transforming the visited value of type Z
+  * the resulting value of the computation
+  */
+ final Z one;
+
+ OneImpl(
+  final Z one
+ ) {
+  this.one = one;
+ }
+
+ /**
+  * transforms the resulting value
   * to an output value of type A
   * by using it as the input value of
   * the function parameter value of type Function<Z, A>
-  *
-  * @param <A> the type of the return value
-  * @param z2a the function parmeter value
-  * @return the return value
   */
+ @Override
  public <A> A travereseUsing(
   final Function<Z, A> z2a
- );
+ ) {
+  return z2a.__(this.one);
+ }
 }
+
+
+
