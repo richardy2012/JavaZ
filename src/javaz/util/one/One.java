@@ -24,14 +24,13 @@ import static javaz.util.one.OneFactory.one;
  * a One instance is a computation
  * resulting in exactly one value of type Z
  * <p/>
- * producing a value of type Z is not part of our DSL
+ * note: producing a value of type Z is not part of our DSL
  */
 public interface One<Z>
  extends Producer<Z> {
  /**
-  * travereseUsing's return value
-  * is obtained by traversing the structure
-  * of the resulting value of a One computation
+  * travereseUsing's return value is obtained by
+  * traversing the structure of the resulting value of a One computation
   * and transforming the visited value to an output value
   * by using it as the input value of
   * travereseUsing's function parameter value
@@ -41,8 +40,8 @@ public interface One<Z>
  );
 
  /**
-  * bnd's return computation value
-  * is obtained by using bnd's function parameter value
+  * bnd's return computation value is obtained by
+  * using bnd's function parameter value
   * as travereseUsing's function argument value
   * <p/>
   * from our DSL point of view:
@@ -63,8 +62,8 @@ public interface One<Z>
   * mz.and(m_z2y) is a computation
   * that binds the resulting value of the computation mz to a variable z
   * and then binds the resulting function value of the computation m_z2y to a variable z2y
-  * and then results in the value
-  * obtained by transforming the input value z to an output value z2y.__(z)
+  * and then results in the value obtained by
+  * transforming the input value z to an output value z2y.__(z)
   * using the function value z2y
   */
  default public <Y> One<Y> and(

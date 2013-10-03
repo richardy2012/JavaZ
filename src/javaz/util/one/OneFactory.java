@@ -15,6 +15,9 @@ package javaz.util.one;
 //                          Luc Duponcheel (ImagineJ)                          //
 /////////////////////////////////////////////////////////////////////////////////
 
+import javaz.util.function.Function;
+import javaz.util.producer.Producer;
+
 public class OneFactory {
  /**
   * one's return computation value
@@ -29,4 +32,37 @@ public class OneFactory {
  ) {
   return new OneImpl<>(z);
  }
+
+ public static <Z>
+ Producer<One<Z>> lift0(
+  final Producer<Z> pz
+ ) {
+  return () -> one(pz.__());
+ }
+
+ public static <Z, Y>
+ Function<One<Z>, One<Y>> lift1(
+  final Function<Z, Y> z2y
+ ) {
+  return mz -> mz.and(
+   one(z -> z2y.__(z)));
+ }
+
+ public static <Z, Y, X>
+ Function<One<Z>, Function<One<Y>, One<X>>> lift2(
+  final Function<Z, Function<Y, X>> z_2_y2x
+ ) {
+  return mz -> my -> mz.and(my.and(
+   one(y -> z -> z_2_y2x.__(z).__(y))));
+ }
 }
+
+/*
+
+
+
+
+
+
+
+ */

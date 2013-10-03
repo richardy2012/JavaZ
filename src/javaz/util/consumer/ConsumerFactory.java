@@ -16,5 +16,12 @@ package javaz.util.consumer;
 /////////////////////////////////////////////////////////////////////////////////
 
 public interface ConsumerFactory {
+ /**
+  * prints string values
+  */
  public static final Consumer<String> stringPrinter = new Printer<>();
+ /**
+  * prints integer values
+  */
+ public static final Consumer<Integer> integerPrinter = new Printer<>();
 }

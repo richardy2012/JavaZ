@@ -16,6 +16,9 @@ package javaz.util.unit;
 /////////////////////////////////////////////////////////////////////////////////
 
 public final class UnitFactory {
+ /**
+  * dummy value
+  */
  public static final Unit unit =
   new Unit();
 }

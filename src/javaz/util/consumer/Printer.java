@@ -17,6 +17,9 @@ package javaz.util.consumer;
 
 public class Printer<Z>
  implements Consumer<Z> {
+ /**
+  * a printer consumes a value by printing it
+  */
  public void __(final Z z) {
   System.out.println(z.toString());
  }

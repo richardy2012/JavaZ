@@ -1,4 +1,4 @@
-package javaz.util.unit;
+package javaz.statics;
 
 /////////////////////////////////////////////////////////////////////////////////
 //      ___________                                         ___________        //
@@ -15,12 +15,15 @@ package javaz.util.unit;
 //                          Luc Duponcheel (ImagineJ)                          //
 /////////////////////////////////////////////////////////////////////////////////
 
-/**
- * dummy class
- */
-public final class Unit {
- @Override
- public String toString() {
-  return "unit";
- }
+import javaz.util.function.Function;
+
+public interface Statics {
+
+ public static final
+ Function<String, Function<String, String>> stringConcatenation =
+  y -> z -> z + y;
+
+ public static final
+ Function<Integer, Function<Integer, Integer>> integerAddition =
+  y -> z -> z + y;
 }
