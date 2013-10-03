@@ -16,12 +16,18 @@ package javaz.util.one;
 /////////////////////////////////////////////////////////////////////////////////
 
 import javaz.util.function.Function;
+import javaz.util.producer.Producer;
+
+import static javaz.util.one.OneFactory.one;
 
 /**
  * a One instance is a computation
  * resulting in exactly one value of type Z
+ * <p/>
+ * producing a value of type Z is not part of our DSL
  */
-public interface One<Z> {
+public interface One<Z>
+ extends Producer<Z> {
  /**
   * travereseUsing's return value
   * is obtained by traversing the structure

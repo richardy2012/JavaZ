@@ -1,4 +1,4 @@
-package javaz.util.one;
+package javaz.util.consumer;
 
 /////////////////////////////////////////////////////////////////////////////////
 //      ___________                                         ___________        //
@@ -15,44 +15,6 @@ package javaz.util.one;
 //                          Luc Duponcheel (ImagineJ)                          //
 /////////////////////////////////////////////////////////////////////////////////
 
-import javaz.util.function.Function;
-
-/**
- * OneImpl is the only implementation of One
- */
-public class OneImpl<Z>
- implements One<Z> {
- /**
-  * the resulting value of the computation
-  */
- final Z z;
-
- OneImpl(
-  final Z z
- ) {
-  this.z = z;
- }
-
- /**
-  * the value is produced
-  * by returning the resulting value of the computation
-  */
- public Z __() {
-  return z;
- }
-
- /**
-  * uses the resulting value of the computation
-  * as the input value of
-  * travereseUsing's function parameter value
-  */
- @Override
- public <A> A travereseUsing(
-  final Function<Z, A> z2a
- ) {
-  return z2a.__(this.z);
- }
+public interface ConsumerFactory {
+ public static final Consumer<String> stringPrinter = new Printer<>();
 }
-
-
-
