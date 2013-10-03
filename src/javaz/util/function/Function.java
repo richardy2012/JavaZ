@@ -20,9 +20,6 @@ package javaz.util.function;
  * an input value of type Z
  * to
  * an output value of type Y
- *
- * @param <Z> the type of the input value
- * @param <Y> the type of the output value
  */
 public interface Function<Z, Y> {
  Y __(final Z z);

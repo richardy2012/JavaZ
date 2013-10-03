@@ -25,25 +25,24 @@ public class OneImpl<Z>
  /**
   * the resulting value of the computation
   */
- final Z one;
+ final Z z;
 
  OneImpl(
-  final Z one
+  final Z z
  ) {
-  this.one = one;
+  this.z = z;
  }
 
  /**
-  * transforms the resulting value
-  * to an output value of type A
-  * by using it as the input value of
-  * the function parameter value of type Function<Z, A>
+  * uses the resulting value of the computation
+  * as the input value of
+  * travereseUsing's function parameter value
   */
  @Override
  public <A> A travereseUsing(
   final Function<Z, A> z2a
  ) {
-  return z2a.__(this.one);
+  return z2a.__(this.z);
  }
 }
 

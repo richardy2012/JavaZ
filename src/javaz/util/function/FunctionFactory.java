@@ -17,13 +17,7 @@ package javaz.util.function;
 
 public class FunctionFactory {
  /**
-  * the return value
-  * of the identity static method
-  * is the same as its parameter value
-  *
-  * @param <Z> the type of the parameter value (and the return value)
-  * @param z   the parameter value
-  * @return return value
+  * id's return value is the same as id's parameter value
   */
  public static <Z> Z id(final Z z) {
   return z;
