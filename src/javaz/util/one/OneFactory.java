@@ -33,6 +33,18 @@ public class OneFactory {
  }
 
  /**
+  * from our DSL point of view:
+  * joining a computation of computations
+  * to a computation
+  */
+ public static <Z> One<Z> join(
+  final One<One<Z>> mmz
+ ) {
+  return mmz.bnd(mz ->
+   mz);
+ }
+
+ /**
   * lifts Z nullary functions
   * to One&lt;Z&gt; nullary functions
   */
@@ -68,6 +80,7 @@ public class OneFactory {
  }
 
  /**
+  * from our DSL point of view:
   * swaps a one of ones
   * to a one of ones
   * <p/>

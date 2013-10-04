@@ -118,6 +118,13 @@ public class OneApp {
    one(one(1)).__().__()
   );
   /**
+   * computation
+   * that yields 1
+   */
+  integerPrinter.__(
+   join(one(one(1))).__()
+  );
+  /**
    * swapOnes is the identity static method
    */
   integerPrinter.__(
@@ -130,6 +137,13 @@ public class OneApp {
    */
   stringPrinter.__(
    one(one("z")).__().__()
+  );
+  /**
+   * computation
+   * that yields "z"
+   */
+  stringPrinter.__(
+   join(one(one("z"))).__()
   );
   /**
    * swapOnes is the identity static method
