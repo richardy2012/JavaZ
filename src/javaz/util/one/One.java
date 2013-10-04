@@ -40,14 +40,14 @@ public interface One<Z>
   * as the input that is transformed to an output by
   * the function argument
   */
- public <A> A travereseUsing(
+ public <A> A traverseUsing(
   final Function<Z, A> z2a
  );
 
  /**
   * bnd's return computation is obtained by
   * using bnd's function argument
-  * as travereseUsing's function argument
+  * as traverseUsing's function argument
   * <p/>
   * from our DSL point of view:
   * mz.bnd(z -> nz) is a computation that
@@ -60,7 +60,7 @@ public interface One<Z>
  default public <Y> One<Y> bnd(
   final Function<Z, One<Y>> z2my
  ) {
-  return this.travereseUsing(
+  return this.traverseUsing(
    z2my
   );
  }
@@ -80,5 +80,25 @@ public interface One<Z>
    m_z2y.bnd(z2y ->
     one(z2y.__(z))));
  }
+
+ /**
+  * general looping method
+  * <p/>
+  * the return value is obtained by
+  * traversing the One structure,
+  * transforming the visited value to a One computation
+  * and using that computation
+  * as the input computation that is transformed to an output computation by
+  * the lifted function argument
+  */
+ default public <Y, A>
+ Function<Function<Z, One<Y>>, One<A>> traverseOnesUsing(
+  final Function<Y, A> y2a
+ ) {
+  return z2my -> traverseUsing(
+   z -> OneFactory.lift1(y2a).__(z2my.__(z))
+  );
+ }
 }
+
 

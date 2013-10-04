@@ -19,8 +19,7 @@ import static javaz.statics.Statics.integerAddition;
 import static javaz.statics.Statics.stringConcatenation;
 import static javaz.util.consumer.ConsumerFactory.integerPrinter;
 import static javaz.util.consumer.ConsumerFactory.stringPrinter;
-import static javaz.util.one.OneFactory.lift2;
-import static javaz.util.one.OneFactory.one;
+import static javaz.util.one.OneFactory.*;
 
 public class OneApp {
  public static void main(String[] args) {
@@ -106,6 +105,34 @@ public class OneApp {
    */
   stringPrinter.__(
    lift2(stringConcatenation).__(one("y")).__(one("z")).__()
+  );
+  /**
+   * computation
+   * that yields a computation
+   * that yields 1
+   */
+  integerPrinter.__(
+   one(one(1)).__().__()
+  );
+  /**
+   * swapOnes is the identity static method
+   */
+  integerPrinter.__(
+   swapOnes(one(one(1))).__().__()
+  );
+  /**
+   * computation
+   * that yields a computation
+   * that yields "z"
+   */
+  stringPrinter.__(
+   one(one("z")).__().__()
+  );
+  /**
+   * swapOnes is the identity static method
+   */
+  stringPrinter.__(
+   swapOnes(one(one("z"))).__().__()
   );
  }
 }

@@ -43,10 +43,10 @@ public class OneImpl<Z>
 
  /**
   * uses the value of the computation
-  * as the input of travereseUsing's function argument
+  * as the input of traverseUsing's function argument
   */
  @Override
- public <A> A travereseUsing(
+ public <A> A traverseUsing(
   final Function<Z, A> z2a
  ) {
   return z2a.__(this.z);

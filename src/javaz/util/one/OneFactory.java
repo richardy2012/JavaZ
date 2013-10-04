@@ -66,14 +66,20 @@ public class OneFactory {
   return mz -> my -> mz.and(my.and(
    one(y -> z -> z_2_y2x.__(z).__(y))));
  }
+
+ /**
+  * swaps a one of ones
+  * to a one of ones
+  * <p/>
+  * swapOnes is the identity static method
+  */
+ public static <Z> One<One<Z>> swapOnes(
+  final One<One<Z>> nmz
+ ) {
+  return nmz.traverseOnesUsing(
+   (One<Z> mz) -> mz).__(
+   lift1(OneFactory::one)
+  );
+ }
 }
 
-/*
-
-
-
-
-
-
-
- */
