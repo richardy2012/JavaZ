@@ -5,6 +5,35 @@
 
  - the main idea is to build a computation DSL
 
+ - for the moment the following computation types
+   are implemented
+
+   - One
+
+ - in the near future the following computation types
+   will be implemented
+
+    - ZeroOrOne (aka Option)
+    - ZeroOrMore (aka Stream)
+    - SuccessOrFailure (aka Try)
+    - State
+    - Future
+    - ZeroOrMoreFuture
+    - ConsoleIO
+    - FutureIO
+    - ...
+
+ - one of the goals of the library is to illustrate that
+
+    - the monadic "bnd" method is, maybe, not abstract enough
+      (I mean does not allow for enough implementation flexibility)
+      to model concepts as exceptions and concurrency in an appropriate way
+      (I mean concise way)
+    - the monoidal "and" method is abstract abstract enough
+      (I mean does allow for enough implementation flexibility)
+      to model concepts as exceptions and concurrency in an appropriate way
+      (I mean concise way)
+
 
 
 Some vocabulary and statements used in comments
