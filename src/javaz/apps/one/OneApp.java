@@ -28,12 +28,12 @@ public class OneApp {
    * that binds 1 to z
    * and then binds 2 to y
    * and then yields z + y
-   *
    */
   integerPrinter.__(
    one(1).bnd(z ->
     one(2).bnd(y ->
-     one(z + y))).__()
+     one(z + y))
+   ).__()
   );
   /**
    * computation
@@ -43,12 +43,13 @@ public class OneApp {
    * note
    *  - no intermediate variables used
    * order (from left to right)
-   *   . first 1
-   *   . second 2
+   *  - first 1
+   *  - second 2
    */
   integerPrinter.__(
    one(1).and(one(2).and(
-    one(integerAddition))).__()
+    one(integerAddition))
+   ).__()
   );
   /**
    * computation
@@ -59,8 +60,8 @@ public class OneApp {
    *  - integerAddition is a reusable fragment
    *  - lift2 is a reusable template
    * order (from left to right)
-   *   . first 2
-   *   . second 1
+   *  - first 2
+   *  - second 1
    */
   integerPrinter.__(
    lift2(integerAddition).__(one(2)).__(one(1)).__()
@@ -74,7 +75,8 @@ public class OneApp {
   stringPrinter.__(
    one("z").bnd(z ->
     one("y").bnd(y ->
-     one(z + y))).__()
+     one(z + y))
+   ).__()
   );
   /**
    * computation
@@ -84,12 +86,13 @@ public class OneApp {
    * note
    *  - no intermediate variables used
    * order (from left to right)
-   *   . first "z"
-   *   . second "y"
+   *  - first "z"
+   *  - second "y"
    */
   stringPrinter.__(
    one("z").and(one("y").and(
-    one(stringConcatenation))).__()
+    one(stringConcatenation))
+   ).__()
   );
   /**
    * computation
@@ -100,8 +103,8 @@ public class OneApp {
    *  - stringConcatenation is a reusable fragment
    *  - lift2 is a reusable template
    * order (from left to right)
-   *   . first "y"
-   *   . second "z"
+   *  - first "y"
+   *  - second "z"
    */
   stringPrinter.__(
    lift2(stringConcatenation).__(one("y")).__(one("z")).__()
