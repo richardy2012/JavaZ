@@ -16,7 +16,7 @@ package javaz.util.producer;
 /////////////////////////////////////////////////////////////////////////////////
 
 /**
- * a producer produces a value of type Z
+ * a producer produces a value (of type Z)
  */
 public interface Producer<Z> {
  Z __();

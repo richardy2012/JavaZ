@@ -20,12 +20,11 @@ import javaz.util.producer.Producer;
 
 public class OneFactory {
  /**
-  * one's return computation value
-  * is a computation resulting in
-  * one's parameter value
+  * one's return computation yields one's argument
   * <p/>
   * from our DSL point of view:
-  * one(z) is a computation resulting in the value z
+  * one(z) is a computation yielding the value z
+  * (z is the value of the computation one(z))
   */
  public static <Z> One<Z> one(
   final Z z
@@ -33,6 +32,10 @@ public class OneFactory {
   return new OneImpl<>(z);
  }
 
+ /**
+  * lifts Z nullary functions
+  * to One&lt;Z&gt; nullary functions
+  */
  public static <Z>
  Producer<One<Z>> lift0(
   final Producer<Z> pz
@@ -40,6 +43,10 @@ public class OneFactory {
   return () -> one(pz.__());
  }
 
+ /**
+  * lifts Z to Y unary functions
+  * to One&lt;Z&gt; to One&lt;Y&gt; unary functions
+  */
  public static <Z, Y>
  Function<One<Z>, One<Y>> lift1(
   final Function<Z, Y> z2y
@@ -48,6 +55,10 @@ public class OneFactory {
    one(z -> z2y.__(z)));
  }
 
+ /**
+  * lifts Z to Y to X binary functions
+  * to One&lt;Z&gt; to One&lt;Y&gt; to One&lt;Z&gt; binary functions
+  */
  public static <Z, Y, X>
  Function<One<Z>, Function<One<Y>, One<X>>> lift2(
   final Function<Z, Function<Y, X>> z_2_y2x

@@ -17,7 +17,7 @@ package javaz.util.function;
 
 public class FunctionFactory {
  /**
-  * id's return value is the same as id's parameter value
+  * id's return value is the same as id's argument
   */
  public static <Z> Z id(final Z z) {
   return z;

@@ -23,7 +23,7 @@ import javaz.util.function.Function;
 public class OneImpl<Z>
  implements One<Z> {
  /**
-  * the resulting value of the computation
+  * the value of the computation
   */
  final Z z;
 
@@ -34,17 +34,16 @@ public class OneImpl<Z>
  }
 
  /**
-  * the value is produced
-  * by returning the resulting value of the computation
+  * produces a value by
+  * returning the value of the computation
   */
  public Z __() {
   return z;
  }
 
  /**
-  * uses the resulting value of the computation
-  * as the input value of
-  * travereseUsing's function parameter value
+  * uses the value of the computation
+  * as the input of travereseUsing's function argument
   */
  @Override
  public <A> A travereseUsing(

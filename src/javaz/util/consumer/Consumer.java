@@ -16,7 +16,7 @@ package javaz.util.consumer;
 /////////////////////////////////////////////////////////////////////////////////
 
 /**
- * a consumer consumes a value of type Z
+ * a consumer consumes a value (of type Z)
  */
 public interface Consumer<Z> {
  void __(final Z z);

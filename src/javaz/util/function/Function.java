@@ -16,10 +16,8 @@ package javaz.util.function;
 /////////////////////////////////////////////////////////////////////////////////
 
 /**
- * a function transforms
- * an input value of type Z
- * to
- * an output value of type Y
+ * a function transforms an input (of type Z)
+ * to an output (of type Y)
  */
 public interface Function<Z, Y> {
  Y __(final Z z);

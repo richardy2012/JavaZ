@@ -18,12 +18,11 @@ package javaz.statics;
 import javaz.util.function.Function;
 
 public interface Statics {
+ public static final
+ Function<Integer, Function<Integer, Integer>> integerAddition =
+  z -> y -> z + y;
 
  public static final
  Function<String, Function<String, String>> stringConcatenation =
-  y -> z -> z + y;
-
- public static final
- Function<Integer, Function<Integer, Integer>> integerAddition =
-  y -> z -> z + y;
+  z -> y -> z + y;
 }

@@ -21,33 +21,41 @@ import javaz.util.producer.Producer;
 import static javaz.util.one.OneFactory.one;
 
 /**
- * a One instance is a computation
- * resulting in exactly one value of type Z
+ * a One instance is a computation that
+ * does nothing but yielding exactly one value (of type Z)
  * <p/>
- * note: producing a value of type Z is not part of our DSL
+ * a One computation also produces a value (of type Z),
+ * but, producing a value is NOT part of the computation DSL,
+ * instead, it is supposed to be used by applications to run the computation
  */
 public interface One<Z>
  extends Producer<Z> {
  /**
-  * travereseUsing's return value is obtained by
-  * traversing the structure of the resulting value of a One computation
-  * and transforming the visited value to an output value
-  * by using it as the input value of
-  * travereseUsing's function parameter value
+  * a One instance has a structure
+  * (consisting of exactly one value)
+  * <p/>
+  * the return value is obtained by
+  * traversing this structure
+  * and using the visited value
+  * as the input that is transformed to an output by
+  * the function argument
   */
  public <A> A travereseUsing(
   final Function<Z, A> z2a
  );
 
  /**
-  * bnd's return computation value is obtained by
-  * using bnd's function parameter value
-  * as travereseUsing's function argument value
+  * bnd's return computation is obtained by
+  * using bnd's function argument
+  * as travereseUsing's function argument
   * <p/>
   * from our DSL point of view:
   * mz.bnd(z -> nz) is a computation that
-  * binds the resulting value of the computation mz to a variable z
-  * and then continues with the computation nz (which can make use of the variable z)
+  * binds the values of the computation mz to a variable z
+  * and then continues with the computation nz
+  * (which can make use of the variable z)
+  * <p/>
+  * note that, for One, there is exactly one such value
   */
  default public <Y> One<Y> bnd(
   final Function<Z, One<Y>> z2my
@@ -60,11 +68,10 @@ public interface One<Z>
  /**
   * from our DSL point of view:
   * mz.and(m_z2y) is a computation
-  * that binds the resulting value of the computation mz to a variable z
-  * and then binds the resulting function value of the computation m_z2y to a variable z2y
-  * and then results in the value obtained by
-  * transforming the input value z to an output value z2y.__(z)
-  * using the function value z2y
+  * that binds the values of the computation mz to a variable z
+  * and then binds the function values of the computation m_z2y to a variable z2y
+  * and then yields values obtained by
+  * transforming the input z to an output z2y.__(z) using the function z2y
   */
  default public <Y> One<Y> and(
   final One<Function<Z, Y>> m_z2y

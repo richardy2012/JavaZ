@@ -1,2 +1,92 @@
-Java Functional Programming Library
-     Luc Duponcheel (ImagineJ)
+===============================================
+=     Java Functional Programming Library     =
+=          Luc Duponcheel (ImagineJ)          =
+===============================================
+
+ - the main idea is to build a computation DSL
+
+
+
+Some vocabulary and statements used in comments
+===============================================
+
+
+[static] methods
+----------------
+
+ - a [static] method return value is obtained by,
+   somehow, making use of its parameter values
+
+ - a [static] method parameter value
+   is called a method argument
+
+ - a [static] method' return value is obtained by,
+   somehow, making use of its arguments
+
+
+functions
+---------
+
+ - a function value,
+   somehow, transforms an input value to an output value
+
+ - a function value is called a function
+
+ - a function is (when appropriate) also called a unary function
+
+ - a function,
+   somehow, transforms an input value to an output value
+
+ - an input value
+   is called an input
+
+ - an output value
+   is called an output
+
+ - a function, somehow, transforms an input to an output
+
+ - a unary function having a unary function output value
+   is called a binary function
+
+
+producers
+---------
+
+ - a producer value,
+   somehow, produces a value
+
+ - a producer value is called a producer
+
+ - a producer is (when appropriate) also called a nullary function
+
+ - a producer,
+   somehow, produces a value
+
+
+
+consumers
+---------
+
+ - a consumer value,
+   somehow, consumes a value
+
+ - a consumer value is called a consumer
+
+ - a consumer,
+   somehow, consumes a value
+
+
+computations
+------------
+
+ - a computation value,
+   somehow, yields values
+
+ - a computation value is called a computation
+
+ - a computation,
+   somehow, yields values
+
+ - the values yielded by a computation
+   are called the values of the computation
+
