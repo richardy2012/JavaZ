@@ -55,7 +55,7 @@ public interface One<Z>
   * and then continues with the computation nz
   * (which can make use of the variable z)
   * <p/>
-  * note that, for One, there is exactly one such value
+  * note that, for One, there is exactly one value
   */
  default public <Y> One<Y> bnd(
   final Function<Z, One<Y>> z2my
@@ -72,6 +72,8 @@ public interface One<Z>
   * and then binds the function values of the computation m_z2y to a variable z2y
   * and then yields values obtained by
   * transforming the input z to an output z2y.__(z) using the function z2y
+  * <p/>
+  * note that, for One, there is exactly one value and exactly one function value
   */
  default public <Y> One<Y> and(
   final One<Function<Z, Y>> m_z2y
@@ -84,9 +86,9 @@ public interface One<Z>
  /**
   * general looping method
   * <p/>
-  * the return value is obtained by
-  * traversing the One structure,
-  * transforming the visited value to a One computation
+  * the output computation of type One&lt;A&gt; is obtained by
+  * traversing the One&lt;Z&gt; structure,
+  * transforming the visited value of type Z to a One&lt;Y&gt; computation
   * and using that computation
   * as the input computation that is transformed to an output computation by
   * the lifted function argument
