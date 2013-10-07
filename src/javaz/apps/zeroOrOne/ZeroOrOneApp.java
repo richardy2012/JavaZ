@@ -14,6 +14,7 @@ package javaz.apps.zeroOrOne;
 //                          Luc Duponcheel (ImagineJ)
 
 import javaz.util.one.OneFactory;
+import javaz.util.zeroOrOne.ZeroOrOne;
 
 import static javaz.statics.Statics.integerAddition;
 import static javaz.statics.Statics.stringConcatenation;
@@ -21,6 +22,14 @@ import static javaz.util.consumer.ConsumerFactory.printer;
 import static javaz.util.zeroOrOne.ZeroOrOneFactory.*;
 
 public class ZeroOrOneApp {
+ private static ZeroOrOne<Integer> integerZero() {
+  return zero();
+ }
+
+ private static ZeroOrOne<String> stringZero() {
+  return zero();
+ }
+
  public static void main(String[] args) {
   /**
    * computation
@@ -152,6 +161,110 @@ public class ZeroOrOneApp {
    */
   printer().__(
    zero()
+  );
+  /**
+   * computation
+   * that yields zero values
+   */
+  printer().__(
+   integerZero().bnd(z ->
+    one(2).bnd(y ->
+     one(z + y)))
+  );
+  /**
+   * computation
+   * that yields zero values
+   */
+  printer().__(
+   one(1).bnd(z ->
+    integerZero().bnd(y ->
+     one(z + y)))
+  );
+
+  /**
+   * computation
+   * that yields zero values
+   */
+  printer().__(
+   integerZero().bnd(z ->
+    integerZero().bnd(y ->
+     one(z + y)))
+  );
+  /**
+   * computation
+   * that yields zero values
+   */
+  printer().__(
+   stringZero().bnd(z ->
+    one("y").bnd(y ->
+     one(z + y)))
+  );
+  /**
+   * computation
+   * that yields zero values
+   */
+  printer().__(
+   one("z").bnd(z ->
+    stringZero().bnd(y ->
+     one(z + y)))
+  );
+
+  /**
+   * computation
+   * that yields zero values
+   */
+  printer().__(
+   stringZero().bnd(z ->
+    stringZero().bnd(y ->
+     one(z + y)))
+  );
+  /**
+   * computation
+   * that yields zero values
+   */
+  printer().__(
+   integerZero().and(one(2)
+    .bind(integerAddition))
+  );
+  /**
+   * computation
+   * that yields zero values
+   */
+  printer().__(
+   one(1).and(integerZero()
+    .bind(integerAddition))
+  );
+  /**
+   * computation
+   * that yields zero values
+   */
+  printer().__(
+   integerZero().and(integerZero()
+    .bind(integerAddition))
+  );
+  /**
+   * computation
+   * that yields zero values
+   */
+  printer().__(
+   stringZero().and(one("y")
+    .bind(stringConcatenation))
+  );
+  /**
+   * computation
+   * that yields zero values
+   */
+  printer().__(
+   one("z").and(stringZero()
+    .bind(stringConcatenation))
+  );
+  /**
+   * computation
+   * that yields zero values
+   */
+  printer().__(
+   stringZero().and(stringZero()
+    .bind(stringConcatenation))
   );
   /**
    * zeroOrOnes
