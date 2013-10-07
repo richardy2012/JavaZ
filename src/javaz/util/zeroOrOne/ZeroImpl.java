@@ -1,4 +1,4 @@
-package javaz.util.unit;
+package javaz.util.zeroOrOne;
 
 //      ___________                                         ___________
 //     /_______   /\                                       /_______   /\
@@ -13,12 +13,31 @@ package javaz.util.unit;
 //                     Java Functional Programming Library
 //                          Luc Duponcheel (ImagineJ)
 
+import javaz.util.function.Function;
+import javaz.util.producer.Producer;
+
 /**
- * dummy class
+ * OneImpl is one of both implementations of ZeroOrOne
  */
-public final class Unit {
+public class ZeroImpl<Z>
+ implements ZeroOrOne<Z> {
+ /**
+  * the return value is the computation obtained by
+  * producing the value produced by
+  * the producer argument
+  */
+ @Override
+ public <A> A traverse(
+  final Producer<A> a,
+  final Function<Z, A> z2a
+ ) {
+  return a.__();
+ }
+
  @Override
  public String toString() {
-  return "unit";
+  return this.show();
  }
 }
+
+

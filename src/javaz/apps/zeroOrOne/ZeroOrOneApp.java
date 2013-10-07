@@ -1,4 +1,4 @@
-package javaz.apps.one;
+package javaz.apps.zeroOrOne;
 
 //      ___________                                         ___________
 //     /_______   /\                                       /_______   /\
@@ -13,14 +13,14 @@ package javaz.apps.one;
 //                     Java Functional Programming Library
 //                          Luc Duponcheel (ImagineJ)
 
-import javaz.util.zeroOrOne.ZeroOrOneFactory;
+import javaz.util.one.OneFactory;
 
 import static javaz.statics.Statics.integerAddition;
 import static javaz.statics.Statics.stringConcatenation;
 import static javaz.util.consumer.ConsumerFactory.printer;
-import static javaz.util.one.OneFactory.*;
+import static javaz.util.zeroOrOne.ZeroOrOneFactory.*;
 
-public class OneApp {
+public class ZeroOrOneApp {
  public static void main(String[] args) {
   /**
    * computation
@@ -135,25 +135,70 @@ public class OneApp {
    join(one(one("z")))
   );
   /**
-   * ones
+   * zeroOrOnes
    */
   printer().__(
-   ones(one(one(1)))
-  );
-  printer().__(
-   ones(one(one("z")))
+   zeroOrOnes(one(one(1)))
   );
   /**
-   * ones
+   * zeroOrOnes
    */
   printer().__(
-   ones(ZeroOrOneFactory.one(one(1)))
+   zeroOrOnes(OneFactory.one(one(1)))
+  );
+  /**
+   * computation
+   * that yields zero values
+   */
+  printer().__(
+   zero()
+  );
+  /**
+   * zeroOrOnes
+   */
+  printer().__(
+   zeroOrOnes(one(zero()))
   );
   printer().__(
-   ones(ZeroOrOneFactory.one(one("z")))
+   zeroOrOnes(zero())
   );
+  /**
+   * zeroOrOnes
+   */
   printer().__(
-   ones(ZeroOrOneFactory.zero())
+   zeroOrOnes(OneFactory.one(zero()))
+  );
+  /**
+   * computation
+   * that yields 1
+   */
+  printer().__(
+   one(1).or(
+    () -> one(2))
+  );
+  /**
+   * computation
+   * that yields 1
+   */
+  printer().__(
+   one(1).or(
+    () -> zero())
+  );
+  /**
+   * computation
+   * that yields 2
+   */
+  printer().__(
+   zero().or(
+    () -> one(2))
+  );
+  /**
+   * computation
+   * that yields zero values
+   */
+  printer().__(
+   zero().or(
+    () -> zero())
   );
  }
 }

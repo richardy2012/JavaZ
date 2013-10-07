@@ -1,4 +1,4 @@
-package javaz.util.one;
+package javaz.util.zeroOrOne;
 
 //      ___________                                         ___________
 //     /_______   /\                                       /_______   /\
@@ -14,18 +14,18 @@ package javaz.util.one;
 //                          Luc Duponcheel (ImagineJ)
 
 import javaz.util.function.Function;
+import javaz.util.one.One;
+import javaz.util.one.OneFactory;
 import javaz.util.producer.Producer;
-import javaz.util.zeroOrOne.ZeroOrOne;
-import javaz.util.zeroOrOne.ZeroOrOneFactory;
 
-public class OneFactory {
+public class ZeroOrOneFactory {
  /**
   * return computation yields argument
   * <p/>
   * one(z) is a computation yielding the value z
   * (z is the value of the computation one(z))
   */
- public static <Z> One<Z> one(
+ public static <Z> ZeroOrOne<Z> one(
   final Z z
  ) {
   return new OneImpl<>(z);
@@ -35,8 +35,8 @@ public class OneFactory {
   * joining a computation of computations
   * to a computation
   */
- public static <Z> One<Z> join(
-  final One<One<Z>> mmz
+ public static <Z> ZeroOrOne<Z> join(
+  final ZeroOrOne<ZeroOrOne<Z>> mmz
  ) {
   return mmz.bnd(mz ->
    mz);
@@ -44,10 +44,10 @@ public class OneFactory {
 
  /**
   * lifts nullary functions
-  * to the One level
+  * to the ZeroOrOne level
   */
  public static <Z>
- Producer<One<Z>> lift0(
+ Producer<ZeroOrOne<Z>> lift0(
   final Producer<Z> z
  ) {
   return () -> one(z.__());
@@ -55,10 +55,10 @@ public class OneFactory {
 
  /**
   * lifts unary functions
-  * to the One level
+  * to the ZeroOrOne level
   */
  public static <Z, Y>
- Function<One<Z>, One<Y>> lift1(
+ Function<ZeroOrOne<Z>, ZeroOrOne<Y>> lift1(
   final Function<Z, Y> z2y
  ) {
   return mz -> mz.and(
@@ -67,10 +67,10 @@ public class OneFactory {
 
  /**
   * lifts binary functions
-  * to the One level
+  * to the ZeroOrOne level
   */
  public static <Z, Y, X>
- Function<One<Z>, Function<One<Y>, One<X>>> lift2(
+ Function<ZeroOrOne<Z>, Function<ZeroOrOne<Y>, ZeroOrOne<X>>> lift2(
   final Function<Z, Function<Y, X>> z_2_y2x
  ) {
   return mz -> my -> mz.and(my.and(
@@ -78,31 +78,48 @@ public class OneFactory {
  }
 
  /**
-  * converts a one of ones
-  * to a one of ones
+  * converts a zero ore one of zero or ones
+  * to a zero ore one of zero or ones
   * <p/>
   */
- public static <Z> One<One<Z>> ones(
-  final One<One<Z>> nmz
+ public static <Z> ZeroOrOne<ZeroOrOne<Z>> zeroOrOnes(
+  final ZeroOrOne<ZeroOrOne<Z>> nmz
  ) {
-  return nmz.traverseOnes(
-   (One<Z> mz) -> mz).__(
-   lift1(OneFactory::one));
+  return nmz.traverseZeroOrOnes(
+   () -> ZeroOrOneFactory.<Z>zero(),
+   (ZeroOrOne<Z> mz) -> mz
+  ).__(lift1(ZeroOrOneFactory::one));
  }
 
  /**
-  * converts a zero or one of ones
-  * to a one of zero or ones
+  * converts a one of zero or ones
+  * to a zero ore one of ones
   * <p/>
   */
- public static <Z> One<ZeroOrOne<Z>> ones(
-  final ZeroOrOne<One<Z>> nmz
+ public static <Z> ZeroOrOne<One<Z>> zeroOrOnes(
+  final One<ZeroOrOne<Z>> nmz
  ) {
-  return nmz.traverseOnes(
-   () -> ZeroOrOneFactory.<Z>zero(),
-   (ZeroOrOne<Z> mz) -> mz).__(
-   lift1(ZeroOrOneFactory::one));
+  return nmz.traverseZeroOrOnes(
+   (One<Z> mz) -> mz
+  ).__(lift1(OneFactory::one));
+ }
+
+ /**
+  * return computation yields zero values
+  * <p/>
+  * zero() is a computation yielding zero values
+  */
+ public static <Z> ZeroOrOne<Z> zero() {
+  return new ZeroImpl<>();
+ }
+
+ /**
+  * static version of or
+  */
+ public static <Z> Function<ZeroOrOne<Z>, ZeroOrOne<Z>> or(
+  final ZeroOrOne<Z> mz1
+ ) {
+  return mz2 -> mz1.or(() -> mz2);
  }
 }
-
 

@@ -1,19 +1,17 @@
 package javaz.util.one;
 
-/////////////////////////////////////////////////////////////////////////////////
-//      ___________                                         ___________        //
-//     /_______   /\                                       /_______   /\       //
-//     \_____ /  / /  _________   ___     ___     _________\_____ /  / /       //
-//           /  / /  /_____   /\ /__/\   /  /\   /_____   /\     /  / /        //
-//          /  / /  _\____/  / / \  \ \ /  / /  _\____/  / /    /  / /         //
-//         /  / /  /  ___   / /   \  \ /  / /  /  ___   / /    /  / /          //
-//     ___/  / /  /  /__/  / /     \  /  / /  /  /__/  / /    /  /_/______     //
-//    /_____/ /  /________/ /       \/__/ /  /________/ /    /___________/\    //
-//    \_____\/   \________\/         \__\/   \________\/     \___________\/    //
-//                                                                             //
-//                     Java Functional Programming Library                     //
-//                          Luc Duponcheel (ImagineJ)                          //
-/////////////////////////////////////////////////////////////////////////////////
+//      ___________                                         ___________
+//     /_______   /\                                       /_______   /\
+//     \_____ /  / /  _________   ___     ___     _________\_____ /  / /
+//           /  / /  /_____   /\ /__/\   /  /\   /_____   /\     /  / /
+//          /  / /  _\____/  / / \  \ \ /  / /  _\____/  / /    /  / /
+//         /  / /  /  ___   / /   \  \ /  / /  /  ___   / /    /  / /
+//     ___/  / /  /  /__/  / /     \  /  / /  /  /__/  / /    /  /_/_____
+//    /_____/ /  /________/ /       \/__/ /  /________/ /    /__________/\
+//    \_____\/   \________\/         \__\/   \________\/     \__________\/
+//
+//                     Java Functional Programming Library
+//                          Luc Duponcheel (ImagineJ)
 
 import javaz.util.function.Function;
 
@@ -34,22 +32,20 @@ public class OneImpl<Z>
  }
 
  /**
-  * produces a value by
-  * returning the value of the computation
-  */
- public Z __() {
-  return z;
- }
-
- /**
-  * uses the value of the computation
-  * as the input of traverseUsing's function argument
+  * the return value is the output obtained by
+  * using the value of the computation as the input that is transformed to an output by
+  * the function argument
   */
  @Override
- public <A> A traverseUsing(
+ public <A> A traverse(
   final Function<Z, A> z2a
  ) {
   return z2a.__(this.z);
+ }
+
+ @Override
+ public String toString() {
+  return this.show();
  }
 }
 

@@ -8,12 +8,12 @@
  - for the moment the following computation types
    are implemented
 
-   - One
+    - One
+    - ZeroOrOne (aka Option)
 
  - in the near future the following computation types
    will be implemented
 
-    - ZeroOrOne (aka Option)
     - ZeroOrMore (aka Stream)
     - SuccessOrFailure (aka Try)
     - State
@@ -49,7 +49,7 @@ Some vocabulary and statements used in comments
  - a [static] method parameter value
    is called a method argument
 
- - a [static] method' return value is obtained by,
+ - a [static] method return value is obtained by,
    somehow, making use of its arguments
 
 
@@ -63,6 +63,11 @@ functions
 
  - a function is (when appropriate) also called a unary function
 
+ - a unary function having a unary function output value
+   is called a binary function
+
+ - ...
+
  - a function,
    somehow, transforms an input value to an output value
 
@@ -73,9 +78,6 @@ functions
    is called an output
 
  - a function, somehow, transforms an input to an output
-
- - a unary function having a unary function output value
-   is called a binary function
 
 
 producers
@@ -116,6 +118,6 @@ computations
  - a computation,
    somehow, yields values
 
- - the values yielded by a computation
-   are called the values of the computation
+ - a values yielded by a computation
+   is called a value of the computation
 
