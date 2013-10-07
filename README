@@ -6,13 +6,13 @@
  - the main idea is to build a computation DSL
 
 
- - one  of the (kind of higher level) goals of the library is to illustrate that
+ - one of the (kind of higher level) goals of the library is to illustrate that
     - the monadic "bnd" method is, maybe, not abstract enough
       (I mean does not allow for enough implementation flexibility)
-      to model concepts as exceptions and concurrency in an natural way
+      to model concepts as exceptions and concurrency in the most natural way
     - the monoidal "and" method is abstract enough
       (I mean does allow for enough implementation flexibility)
-      to model concepts as exceptions and concurrency in an natural way
+      to model concepts as exceptions and concurrency in a more natural way
 
  - for the moment the following computation types
    are implemented
