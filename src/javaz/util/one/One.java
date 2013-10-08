@@ -133,7 +133,7 @@ public interface One<Z> {
  }
 
  default public String show() {
-  return traverse(
+  return this.traverse(
    z -> "( " + z + " )"
   );
  }
