@@ -76,7 +76,7 @@ public interface One<Z> {
  ) {
   return this.bnd(z ->
    m_z2y.bnd(z2y ->
-    one(z2y.__(z))));
+    one(z2y.apply(z))));
  }
 
  /**
@@ -110,7 +110,7 @@ public interface One<Z> {
   final Function<Y, A> y2a
  ) {
   return z2my -> traverse(
-   z -> OneFactory.lift1(y2a).__(z2my.__(z))
+   z -> OneFactory.lift1(y2a).apply(z2my.apply(z))
   );
  }
 
@@ -128,7 +128,7 @@ public interface One<Z> {
   final Function<Y, A> y2a
  ) {
   return z2my -> traverse(
-   z -> ZeroOrOneFactory.lift1(y2a).__(z2my.__(z))
+   z -> ZeroOrOneFactory.lift1(y2a).apply(z2my.apply(z))
   );
  }
 

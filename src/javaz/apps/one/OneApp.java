@@ -28,7 +28,7 @@ public class OneApp {
    * and then binds 2 to y
    * and then yields z + y
    */
-  printer().__(
+  printer().consume(
    one(1).bnd(z ->
     one(2).bnd(y ->
      one(z + y)))
@@ -44,7 +44,7 @@ public class OneApp {
    *  - first 1
    *  - second 2
    */
-  printer().__(
+  printer().consume(
    one(1).and(one(2)
     .bind(integerAddition))
   );
@@ -60,8 +60,8 @@ public class OneApp {
    *  - first 2
    *  - second 1
    */
-  printer().__(
-   lift2(integerAddition).__(one(2)).__(one(1))
+  printer().consume(
+   lift2(integerAddition).apply(one(2)).apply(one(1))
   );
   /**
    * computation
@@ -69,7 +69,7 @@ public class OneApp {
    * and then binds "y" to y
    * and then yields z + y
    */
-  printer().__(
+  printer().consume(
    one("z").bnd(z ->
     one("y").bnd(y ->
      one(z + y)))
@@ -85,7 +85,7 @@ public class OneApp {
    *  - first "z"
    *  - second "y"
    */
-  printer().__(
+  printer().consume(
    one("z").and(one("y")
     .bind(stringConcatenation))
   );
@@ -101,22 +101,22 @@ public class OneApp {
    *  - first "y"
    *  - second "z"
    */
-  printer().__(
-   lift2(stringConcatenation).__(one("y")).__(one("z"))
+  printer().consume(
+   lift2(stringConcatenation).apply(one("y")).apply(one("z"))
   );
   /**
    * computation
    * that yields a computation
    * that yields 1
    */
-  printer().__(
+  printer().consume(
    one(one(1))
   );
   /**
    * computation
    * that yields 1
    */
-  printer().__(
+  printer().consume(
    join(one(one(1)))
   );
   /**
@@ -124,35 +124,35 @@ public class OneApp {
    * that yields a computation
    * that yields "z"
    */
-  printer().__(
+  printer().consume(
    one(one("z"))
   );
   /**
    * computation
    * that yields "z"
    */
-  printer().__(
+  printer().consume(
    join(one(one("z")))
   );
   /**
    * ones
    */
-  printer().__(
+  printer().consume(
    ones(one(one(1)))
   );
-  printer().__(
+  printer().consume(
    ones(one(one("z")))
   );
   /**
    * ones
    */
-  printer().__(
+  printer().consume(
    ones(ZeroOrOneFactory.one(one(1)))
   );
-  printer().__(
+  printer().consume(
    ones(ZeroOrOneFactory.one(one("z")))
   );
-  printer().__(
+  printer().consume(
    ones(ZeroOrOneFactory.zero())
   );
  }

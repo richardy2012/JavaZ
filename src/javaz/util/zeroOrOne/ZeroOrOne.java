@@ -19,6 +19,7 @@ import javaz.util.one.OneFactory;
 import javaz.util.producer.Producer;
 
 import static javaz.util.zeroOrOne.ZeroOrOneFactory.one;
+import static javaz.util.zeroOrOne.ZeroOrOneFactory.zero;
 
 /**
  * a ZeroOrOne instance is a computation that
@@ -87,7 +88,7 @@ public interface ZeroOrOne<Z> {
  ) {
   return this.bnd(z ->
    m_z2y.bnd(z2y ->
-    one(z2y.__(z))));
+    one(z2y.apply(z))));
  }
 
  /**
@@ -126,7 +127,7 @@ public interface ZeroOrOne<Z> {
  ) {
   return z2my -> traverse(
    OneFactory.lift0(a),
-   z -> OneFactory.lift1(y2a).__(z2my.__(z))
+   z -> OneFactory.lift1(y2a).apply(z2my.apply(z))
   );
  }
 
@@ -149,7 +150,7 @@ public interface ZeroOrOne<Z> {
  ) {
   return z2my -> traverse(
    ZeroOrOneFactory.lift0(a),
-   z -> ZeroOrOneFactory.lift1(y2a).__(z2my.__(z))
+   z -> ZeroOrOneFactory.lift1(y2a).apply(z2my.apply(z))
   );
  }
 
@@ -166,10 +167,25 @@ public interface ZeroOrOne<Z> {
  default public ZeroOrOne<Z> or(
   final Producer<ZeroOrOne<Z>> mz
  ) {
-  return traverse(
+  return this.traverse(
    mz,
    ZeroOrOneFactory::one
   );
+ }
+
+ /**
+  * mz.bind(z2y) is a computation
+  * that binds the values of the computation mz to variables z
+  * and then yields values obtained by
+  * filtering out values that, when used
+  * as an input of the function predicate,
+  * are transformed to a false output
+  */
+ default public ZeroOrOne<Z> filter(
+  final Function<Z, Boolean> z2b
+ ) {
+  return this.bnd(z ->
+   z2b.apply(z) ? one(z) : zero());
  }
 
  default public String show() {

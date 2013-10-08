@@ -20,5 +20,5 @@ package javaz.util.function;
  * an output (of type Y)
  */
 public interface Function<Z, Y> {
- Y __(final Z z);
+ Y apply(final Z z);
 }

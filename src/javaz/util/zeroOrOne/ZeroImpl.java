@@ -31,7 +31,7 @@ public class ZeroImpl<Z>
   final Producer<A> a,
   final Function<Z, A> z2a
  ) {
-  return a.__();
+  return a.produce();
  }
 
  @Override

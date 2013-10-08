@@ -50,7 +50,7 @@ public class OneFactory {
  Producer<One<Z>> lift0(
   final Producer<Z> z
  ) {
-  return () -> one(z.__());
+  return () -> one(z.produce());
  }
 
  /**
@@ -62,7 +62,7 @@ public class OneFactory {
   final Function<Z, Y> z2y
  ) {
   return mz -> mz.and(
-   one(z -> z2y.__(z)));
+   one(z -> z2y.apply(z)));
  }
 
  /**
@@ -74,7 +74,7 @@ public class OneFactory {
   final Function<Z, Function<Y, X>> z_2_y2x
  ) {
   return mz -> my -> mz.and(my.and(
-   one(y -> z -> z_2_y2x.__(z).__(y))));
+   one(y -> z -> z_2_y2x.apply(z).apply(y))));
  }
 
  /**
@@ -86,7 +86,7 @@ public class OneFactory {
   final One<One<Z>> nmz
  ) {
   return nmz.traverseOnes(
-   (One<Z> mz) -> mz).__(
+   (One<Z> mz) -> mz).apply(
    lift1(OneFactory::one));
  }
 
@@ -100,7 +100,7 @@ public class OneFactory {
  ) {
   return nmz.traverseOnes(
    () -> ZeroOrOneFactory.<Z>zero(),
-   (ZeroOrOne<Z> mz) -> mz).__(
+   (ZeroOrOne<Z> mz) -> mz).apply(
    lift1(ZeroOrOneFactory::one));
  }
 }

@@ -18,5 +18,5 @@ package javaz.util.consumer;
  * a value (of type Z)
  */
 public interface Consumer<Z> {
- void __(final Z z);
+ void consume(final Z z);
 }

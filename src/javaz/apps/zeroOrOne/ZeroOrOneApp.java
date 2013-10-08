@@ -37,7 +37,7 @@ public class ZeroOrOneApp {
    * and then binds 2 to y
    * and then yields z + y
    */
-  printer().__(
+  printer().consume(
    one(1).bnd(z ->
     one(2).bnd(y ->
      one(z + y)))
@@ -53,7 +53,7 @@ public class ZeroOrOneApp {
    *  - first 1
    *  - second 2
    */
-  printer().__(
+  printer().consume(
    one(1).and(one(2)
     .bind(integerAddition))
   );
@@ -69,8 +69,8 @@ public class ZeroOrOneApp {
    *  - first 2
    *  - second 1
    */
-  printer().__(
-   lift2(integerAddition).__(one(2)).__(one(1))
+  printer().consume(
+   lift2(integerAddition).apply(one(2)).apply(one(1))
   );
   /**
    * computation
@@ -78,7 +78,7 @@ public class ZeroOrOneApp {
    * and then binds "y" to y
    * and then yields z + y
    */
-  printer().__(
+  printer().consume(
    one("z").bnd(z ->
     one("y").bnd(y ->
      one(z + y)))
@@ -94,7 +94,7 @@ public class ZeroOrOneApp {
    *  - first "z"
    *  - second "y"
    */
-  printer().__(
+  printer().consume(
    one("z").and(one("y")
     .bind(stringConcatenation))
   );
@@ -110,22 +110,22 @@ public class ZeroOrOneApp {
    *  - first "y"
    *  - second "z"
    */
-  printer().__(
-   lift2(stringConcatenation).__(one("y")).__(one("z"))
+  printer().consume(
+   lift2(stringConcatenation).apply(one("y")).apply(one("z"))
   );
   /**
    * computation
    * that yields a computation
    * that yields 1
    */
-  printer().__(
+  printer().consume(
    one(one(1))
   );
   /**
    * computation
    * that yields 1
    */
-  printer().__(
+  printer().consume(
    join(one(one(1)))
   );
   /**
@@ -133,40 +133,40 @@ public class ZeroOrOneApp {
    * that yields a computation
    * that yields "z"
    */
-  printer().__(
+  printer().consume(
    one(one("z"))
   );
   /**
    * computation
    * that yields "z"
    */
-  printer().__(
+  printer().consume(
    join(one(one("z")))
   );
   /**
    * zeroOrOnes
    */
-  printer().__(
+  printer().consume(
    zeroOrOnes(one(one(1)))
   );
   /**
    * zeroOrOnes
    */
-  printer().__(
+  printer().consume(
    zeroOrOnes(OneFactory.one(one(1)))
   );
   /**
    * computation
    * that yields zero values
    */
-  printer().__(
+  printer().consume(
    zero()
   );
   /**
    * computation
    * that yields zero values
    */
-  printer().__(
+  printer().consume(
    integerZero().bnd(z ->
     one(2).bnd(y ->
      one(z + y)))
@@ -175,7 +175,7 @@ public class ZeroOrOneApp {
    * computation
    * that yields zero values
    */
-  printer().__(
+  printer().consume(
    one(1).bnd(z ->
     integerZero().bnd(y ->
      one(z + y)))
@@ -185,7 +185,7 @@ public class ZeroOrOneApp {
    * computation
    * that yields zero values
    */
-  printer().__(
+  printer().consume(
    integerZero().bnd(z ->
     integerZero().bnd(y ->
      one(z + y)))
@@ -194,7 +194,7 @@ public class ZeroOrOneApp {
    * computation
    * that yields zero values
    */
-  printer().__(
+  printer().consume(
    stringZero().bnd(z ->
     one("y").bnd(y ->
      one(z + y)))
@@ -203,7 +203,7 @@ public class ZeroOrOneApp {
    * computation
    * that yields zero values
    */
-  printer().__(
+  printer().consume(
    one("z").bnd(z ->
     stringZero().bnd(y ->
      one(z + y)))
@@ -213,7 +213,7 @@ public class ZeroOrOneApp {
    * computation
    * that yields zero values
    */
-  printer().__(
+  printer().consume(
    stringZero().bnd(z ->
     stringZero().bnd(y ->
      one(z + y)))
@@ -222,7 +222,7 @@ public class ZeroOrOneApp {
    * computation
    * that yields zero values
    */
-  printer().__(
+  printer().consume(
    integerZero().and(one(2)
     .bind(integerAddition))
   );
@@ -230,7 +230,7 @@ public class ZeroOrOneApp {
    * computation
    * that yields zero values
    */
-  printer().__(
+  printer().consume(
    one(1).and(integerZero()
     .bind(integerAddition))
   );
@@ -238,7 +238,7 @@ public class ZeroOrOneApp {
    * computation
    * that yields zero values
    */
-  printer().__(
+  printer().consume(
    integerZero().and(integerZero()
     .bind(integerAddition))
   );
@@ -246,7 +246,7 @@ public class ZeroOrOneApp {
    * computation
    * that yields zero values
    */
-  printer().__(
+  printer().consume(
    stringZero().and(one("y")
     .bind(stringConcatenation))
   );
@@ -254,7 +254,7 @@ public class ZeroOrOneApp {
    * computation
    * that yields zero values
    */
-  printer().__(
+  printer().consume(
    one("z").and(stringZero()
     .bind(stringConcatenation))
   );
@@ -262,30 +262,72 @@ public class ZeroOrOneApp {
    * computation
    * that yields zero values
    */
-  printer().__(
+  printer().consume(
    stringZero().and(stringZero()
     .bind(stringConcatenation))
   );
   /**
+   * computation
+   * that yields 1
+   */
+  printer().consume(
+   one(1).filter(i -> i % 2 == 1)
+  );
+  /**
+   * computation
+   * that yields zero values
+   */
+  printer().consume(
+   one(1).filter(i -> i % 2 == 0)
+  );
+  /**
+   * computation
+   * that yields zero values
+   */
+  printer().consume(
+   integerZero().filter(i -> i % 2 == 0)
+  );
+  /**
+   * computation
+   * that yields "z"
+   */
+  printer().consume(
+   one("z").filter(s -> s.equals("z"))
+  );
+  /**
+   * computation
+   * that yields zero values
+   */
+  printer().consume(
+   one("z").filter(s -> s.equals("y"))
+  );
+  /**
+   * computation
+   * that yields zero values
+   */
+  printer().consume(
+   stringZero().filter(s -> s.equals("y"))
+  );
+  /**
    * zeroOrOnes
    */
-  printer().__(
+  printer().consume(
    zeroOrOnes(one(zero()))
   );
-  printer().__(
+  printer().consume(
    zeroOrOnes(zero())
   );
   /**
    * zeroOrOnes
    */
-  printer().__(
+  printer().consume(
    zeroOrOnes(OneFactory.one(zero()))
   );
   /**
    * computation
    * that yields 1
    */
-  printer().__(
+  printer().consume(
    one(1).or(
     () -> one(2))
   );
@@ -293,7 +335,7 @@ public class ZeroOrOneApp {
    * computation
    * that yields 1
    */
-  printer().__(
+  printer().consume(
    one(1).or(
     () -> zero())
   );
@@ -301,7 +343,7 @@ public class ZeroOrOneApp {
    * computation
    * that yields 2
    */
-  printer().__(
+  printer().consume(
    zero().or(
     () -> one(2))
   );
@@ -309,7 +351,7 @@ public class ZeroOrOneApp {
    * computation
    * that yields zero values
    */
-  printer().__(
+  printer().consume(
    zero().or(
     () -> zero())
   );

@@ -40,7 +40,7 @@ public class OneImpl<Z>
  public <A> A traverse(
   final Function<Z, A> z2a
  ) {
-  return z2a.__(this.z);
+  return z2a.apply(this.z);
  }
 
  @Override

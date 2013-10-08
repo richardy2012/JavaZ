@@ -56,6 +56,9 @@ functions
 
  - a function value is called a function
 
+ - a function with a boolean output value
+   is called a predicate
+
  - a function is (when appropriate) also called a unary function
 
  - a unary function having a unary function output value

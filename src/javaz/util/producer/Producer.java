@@ -18,5 +18,5 @@ package javaz.util.producer;
  * a value (of type Z)
  */
 public interface Producer<Z> {
- Z __();
+ Z produce();
 }
